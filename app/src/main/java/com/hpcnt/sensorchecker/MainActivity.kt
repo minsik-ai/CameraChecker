@@ -9,11 +9,15 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TextView
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import com.hpcnt.sensorchecker.camera.CameraExtensions
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.ArrayList
+import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,6 +72,19 @@ class MainActivity : AppCompatActivity() {
 
 
         navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        TedPermission.with(this)
+                .setPermissionListener (object : PermissionListener {
+                    override fun onPermissionGranted() {
+                        navigation_view.menu.getItem(0).isChecked = true
+                    }
+
+                    override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
+                        finish()
+                    }
+                })
+                .setPermissions(android.Manifest.permission.CAMERA)
+                .check()
     }
 }
 
