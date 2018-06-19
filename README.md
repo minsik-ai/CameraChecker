@@ -7,3 +7,4 @@ Fight hard-to-handle Android camera fragmentation with this useful tool.
 ## How-to-use
 
 - Build with Gradle & Install to target device.
+- Run Application.
