@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_back_camera"
+        android:icon="@drawable/camera_512"
+        android:title="@string/title_back_camera" />
+
+    <item
+        android:id="@+id/navigation_front_camera"
+        android:icon="@drawable/camera_512"
+        android:title="@string/title_front_camera" />
+
+    <item
+        android:id="@+id/navigation_sensors"
+        android:icon="@drawable/spotify_512"
+        android:title="@string/title_sensors" />
+
+</menu>

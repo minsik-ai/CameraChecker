@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SensorChecker</string>
+    <string name="title_back_camera">Back</string>
+    <string name="title_front_camera">Front</string>
+    <string name="title_sensors">Sensors</string>
+    <string name="title_settings">Settings</string>
+</resources>
