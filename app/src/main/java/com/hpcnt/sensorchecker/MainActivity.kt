@@ -16,8 +16,7 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.ArrayList
-import java.util.jar.Manifest
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -75,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         TedPermission.with(this)
-                .setPermissionListener (object : PermissionListener {
+                .setPermissionListener(object : PermissionListener {
                     override fun onPermissionGranted() {
                         navigation_view.findViewById<View>(R.id.navigation_back_camera).performClick()
                     }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import com.hpcnt.sensorchecker.extensions.getSystemService
-import timber.log.Timber
 
 class SensorView(applicationContext: Context) : BaseView(applicationContext) {
 

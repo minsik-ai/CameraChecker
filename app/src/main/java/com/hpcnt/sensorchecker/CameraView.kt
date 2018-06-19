@@ -44,7 +44,8 @@ class CameraView(applicationContext: Context, private val facing: CameraExtensio
             "${it[Camera.Parameters.PREVIEW_FPS_MIN_INDEX]}x${it[Camera.Parameters.PREVIEW_FPS_MAX_INDEX]}"
         } ?: "NONE"
 
-        val isVideoStabilizationSupported = availability(params?.isVideoStabilizationSupported ?: false)
+        val isVideoStabilizationSupported = availability(params?.isVideoStabilizationSupported
+                ?: false)
 
         val supportedFocusModes = params?.supportedFocusModes?.joinToString() ?: "NONE"
 
