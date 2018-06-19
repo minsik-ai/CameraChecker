@@ -12,5 +12,9 @@ abstract class BaseView(protected val applicationContext: Context) {
         Timber.d("${this.javaClass.name} trigger")
     }
 
+    open fun release() {
+        Timber.d("${this.javaClass.name} clear")
+    }
+
     protected fun availability(isAvailable: Boolean): String = if (isAvailable) "TRUE" else "FALSE"
 }

@@ -1,14 +1,24 @@
 package com.hpcnt.sensorchecker
 
 import android.content.Context
+import android.hardware.Camera
 import com.hpcnt.sensorchecker.camera.CameraExtensions
 
+@Suppress("DEPRECATION")
 class CameraView(applicationContext: Context, private val facing: CameraExtensions.FACING) : BaseView(applicationContext) {
 
     private val cameraInfo = try {
         CameraExtensions.openCamera(facing)
     } catch (e: RuntimeException) {
         Pair(null, null)
+    }
+
+    override fun release() {
+        super.release()
+
+        val (camera, _) = cameraInfo
+
+        camera?.release()
     }
 
     override fun trigger() {
@@ -30,7 +40,9 @@ class CameraView(applicationContext: Context, private val facing: CameraExtensio
 
         val supportedColorEffects = params?.supportedColorEffects?.joinToString() ?: "NONE"
 
-        val supportedPreviewFpsRange = params?.supportedPreviewFpsRange?.joinToString() ?: "NONE"
+        val supportedPreviewFpsRange = params?.supportedPreviewFpsRange?.joinToString {
+            "${it[Camera.Parameters.PREVIEW_FPS_MIN_INDEX]}x${it[Camera.Parameters.PREVIEW_FPS_MAX_INDEX]}"
+        } ?: "NONE"
 
         val isVideoStabilizationSupported = availability(params?.isVideoStabilizationSupported ?: false)
 
@@ -41,6 +53,8 @@ class CameraView(applicationContext: Context, private val facing: CameraExtensio
         val maxNumMeteringAreas = params?.maxNumMeteringAreas.toString()
 
         val isZoomSupported = availability(params?.isZoomSupported ?: false)
+
+        val zoomRatios = params?.zoomRatios?.joinToString() ?: "NONE"
 
         val items = listOf(
                 ContentItem("Camera Available", cameraAvailable),
@@ -55,7 +69,8 @@ class CameraView(applicationContext: Context, private val facing: CameraExtensio
                 ContentItem("Supported Focus Modes", supportedFocusModes),
                 ContentItem("Max Num Focus", maxNumFocusAreas),
                 ContentItem("Max Num Metering", maxNumMeteringAreas),
-                ContentItem("is Zoom Supported", isZoomSupported)
+                ContentItem("is Zoom Supported", isZoomSupported),
+                ContentItem("Zoom Ratios", zoomRatios)
         )
 
         output.postValue(items)

@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         currentView?.output?.removeObservers(this)
+        currentView?.release()
         itemAdapter.clear()
 
         fun update() {
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         TedPermission.with(this)
                 .setPermissionListener (object : PermissionListener {
                     override fun onPermissionGranted() {
-                        navigation_view.menu.getItem(0).isChecked = true
+                        navigation_view.findViewById<View>(R.id.navigation_back_camera).performClick()
                     }
 
                     override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
