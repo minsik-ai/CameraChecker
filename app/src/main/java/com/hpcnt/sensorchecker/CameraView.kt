@@ -30,6 +30,14 @@ class CameraView(applicationContext: Context, private val facing: CameraExtensio
 
         val params = camera?.parameters
 
+        val supportedPreviewSizes = params?.supportedPreviewSizes?.joinToString {
+            "${it.width}x${it.height}"
+        } ?: "NONE"
+
+        val supportedPictureSizes = params?.supportedPictureSizes?.joinToString {
+            "${it.width}x${it.height}"
+        } ?: "NONE"
+
         val supportedSceneModes = params?.supportedSceneModes?.joinToString() ?: "NONE"
 
         val supportedWhiteBalance = params?.supportedWhiteBalance?.joinToString() ?: "NONE"
@@ -60,6 +68,8 @@ class CameraView(applicationContext: Context, private val facing: CameraExtensio
         val items = listOf(
                 ContentItem("Camera Available", cameraAvailable),
                 ContentItem("Camera Rotation", orientation.toString()),
+                ContentItem("Supported Preview Sizes", supportedPreviewSizes),
+                ContentItem("Supported Picture Sizes", supportedPictureSizes),
                 ContentItem("Supported Scene Modes", supportedSceneModes),
                 ContentItem("Supported White Balance", supportedWhiteBalance),
                 ContentItem("Supported Flash Modes", supportedFlashModes),
